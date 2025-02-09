@@ -78,8 +78,7 @@ const categoriesHumorMe = {
     "Owner is shown with a trophy before the game even starts",
     "Announcers talk about how much money the owner has spent on 'improvements'",
     "Owner waves like royalty to their adoring peasants"
-  ],
-  // Players and Commentators remain the same as before
+  ]
 };
 
 const categoriesSillyWalks = {
@@ -119,3 +118,74 @@ const generateRandomCard = (categories) => {
   saveCardState();
   return currentCard;
 };
+
+// Save the current card and its state
+const saveCardState = () => {
+  localStorage.setItem("bingoCard", JSON.stringify(currentCard));
+  localStorage.setItem("highlightedState", JSON.stringify(highlightedState));
+};
+
+// Load the card and its state
+const loadCardState = () => {
+  currentCard = JSON.parse(localStorage.getItem("bingoCard"));
+  highlightedState = JSON.parse(localStorage.getItem("highlightedState"));
+};
+
+const renderHomeScreen = () => {
+  app.innerHTML = `
+    <div class="container">
+      <img src="logo1.png" alt="Logo" class="logo">
+      <h1>The Fancy Schmancy Dinner Club's First Annual Dandy-Cup Party</h1>
+      <button onclick="handleGenerateNewCard(categoriesSemiSerious)">Generate New Card</button>
+      <button onclick="handleGenerateNewCard(categoriesHumorMe)">Humor Me</button>
+      <button onclick="handleGenerateNewCard(categoriesSillyWalks)">Ministry of Silly Walks</button>
+      <button class="return-button" onclick="renderCardScreen()">Return to Card</button>
+    </div>
+  `;
+};
+
+const renderCardScreen = () => {
+  if (!currentCard) loadCardState(); // Load card if not already loaded
+  app.innerHTML = `
+    <div class="container">
+      <button onclick="renderHomeScreen()">Endzone</button>
+      <div id="bingoCard" class="bingo-card"></div>
+    </div>
+  `;
+  renderBingoCard(currentCard);
+};
+
+const renderBingoCard = (card) => {
+  const bingoCard = document.getElementById("bingoCard");
+  bingoCard.innerHTML = ""; // Clear any existing card
+  card.forEach((square, index) => {
+    const div = document.createElement("div");
+    div.className = "bingo-square";
+    div.textContent = square;
+    if (index === 12) {
+      // Center square is the "Free" square
+      div.textContent = "★";
+      div.classList.add("clicked");
+    }
+    if (highlightedState[index]) {
+      div.classList.add("clicked");
+    }
+    div.addEventListener("click", () => toggleSquare(div, index));
+    bingoCard.appendChild(div);
+  });
+};
+
+const toggleSquare = (square, index) => {
+  if (index === 12) return; // Center square cannot be toggled
+  square.classList.toggle("clicked");
+  highlightedState[index] = square.classList.contains("clicked");
+  saveCardState();
+};
+
+const handleGenerateNewCard = (categories) => {
+  generateRandomCard(categories);
+  renderCardScreen();
+};
+
+// Initial Render
+renderHomeScreen();
