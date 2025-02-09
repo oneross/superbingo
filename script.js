@@ -72,7 +72,7 @@ const renderHomeScreen = () => {
       <button onclick="renderCardScreen()">Return to Card</button>
       <div class="qr-container">
         <h2>Share with Friends</h2>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://oneross.github.io/superbingo" alt="QR Code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://oneross.github.io/superbingo&bgcolor=d8d8d6" alt="QR Code">
       </div>
     </div>
   `;
