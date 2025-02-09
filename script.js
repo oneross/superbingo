@@ -194,7 +194,7 @@ const renderHomeScreen = () => {
   app.innerHTML = `
     <div class="container">
       <img src="logo1.png" alt="Logo" class="logo">
-      <h1>The Fancy Schmancy Dinner Club's First Annual Dandy-Cup Party</h1>
+      <h1>The Fancy Schmancy Dinner Club's Second Annual Dandy-Cup Party</h1>
       <button onclick="handleGenerateNewCard(categoriesSemiSerious)">Generate New Card</button>
       <button onclick="handleGenerateNewCard(categoriesHumorMe)">Humor Me</button>
       <button onclick="handleGenerateNewCard(categoriesSillyWalks)">Ministry of Silly Walks</button>
