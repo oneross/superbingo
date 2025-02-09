@@ -2,70 +2,94 @@ const app = document.getElementById("app");
 let currentCard = null;
 let highlightedState = null;
 
-const categories = {
-    "Commercials": [
-      "A commercial with a puppy, because who doesn’t like puppies?",
-      "A celebrity cameo so random it feels like Mad Libs",
-      "An ad that tries too hard to make you cry about toilet paper",
-      "A truck commercial with dirt flying like it's auditioning for an action movie",
-      "A commercial that makes you whisper, 'Wait, what was that even for?'",
-      "Beer ad with a slow-motion cheers that looks suspiciously sexy",
-      "Crypto ad that pretends 2022 didn’t happen",
-      "An ad with a jingle so catchy you hate yourself for liking it",
-      "A luxury car ad featuring people who definitely don’t drive",
-      "A commercial where a famous actor tries way too hard to look relatable"
-    ],
-    "Owners": [
-      "Owner smugly eating shrimp cocktail in slow motion",
-      "Billionaire owner laughs maniacally like a cartoon villain",
-      "Owner wearing a hat so ridiculous it deserves its own fashion line",
-      "Announcer refers to an owner as a 'visionary' (seriously?)",
-      "Owner shaking hands with a celebrity who clearly doesn’t know who they are",
-      "Owner awkwardly high-fives a random fan for the camera",
-      "A shot of the owner looking bored despite their team winning",
-      "Owner is shown with a trophy before the game even starts",
-      "Announcers talk about how much money the owner has spent on 'improvements'",
-      "Owner waves like royalty to their adoring peasants"
-    ],
-    "Players": [
-      "Quarterback’s hair is discussed like it’s a critical stat",
-      "Player celebrates a 3-yard gain like they’ve won a Nobel Prize",
-      "A player flexes dramatically for no reason (as if we weren’t already impressed)",
-      "Slow-motion close-up of a player’s face that’s 90% sweat",
-      "Player fumbles, and announcers pretend it’s the end of the world",
-      "A lineman is described as having 'deceptive speed' (code for slow)",
-      "Player has a touchdown dance more choreographed than a Broadway show",
-      "Announcer says a player 'has ice in his veins' (like he’s a cyborg)",
-      "Announcers discuss a player's obscure childhood hobby (like knitting or taxidermy)",
-      "A kicker misses, and the camera cuts to someone looking disappointed"
-    ],
-    "Commentators": [
-      "Announcers call the field 'the battlefield' like it’s *Gladiator*",
-      "Commentator awkwardly tries to explain the rules to the audience",
-      "Announcer says 'unbelievable!' for something totally believable",
-      "Commentator references a random stat from 1982 for no reason",
-      "Sideline reporter interviews a coach who clearly doesn’t want to be there",
-      "Commentator yells 'What a catch!' even when it’s not",
-      "Commentator makes an awkward pun that lands like a lead balloon",
-      "Commentators use the word 'legacy' as if it’s a Shakespeare play",
-      "Announcers hype up a player’s pre-game meal like it’s life-changing",
-      "A commentator tries to sound deep and ends up just being confusing"
-    ],
-    "General": [
-      "National anthem singer holds the final note long enough for a bathroom break",
-      "A tackle so dramatic it looks like a Mortal Kombat move",
-      "Half-time show looks like it was designed by a glitter-obsessed 5-year-old",
-      "Fan in the stands crying, possibly because they spent $5,000 on tickets",
-      "Game goes into overtime, and someone groans loudly",
-      "A streaker runs onto the field and gets tackled harder than any player",
-      "Camera zooms in on a coach screaming something definitely not PG",
-      "The mascot does something weirdly athletic for no reason",
-      "Announcer says 'this is what it’s all about' like it’s the *Hunger Games*",
-      "Someone in the room says, 'Wait, what just happened?'"
-    ]
-  };
+// Generate random bingo card
+const categoriesSemiSerious = {
+  "Commercials": [
+    "A commercial with a puppy",
+    "A celebrity cameo nobody expected",
+    "An ad so vague no one knows what it’s for",
+    "A truck commercial featuring slow-motion dirt",
+    "A commercial with a forced emotional appeal"
+  ],
+  "Halftime Show": [
+    "Dancers wearing glitter so bright it could blind a satellite",
+    "The lead performer 'accidentally' promotes their new single",
+    "A surprise guest everyone predicted weeks ago",
+    "Pyrotechnics so intense they scare a nearby pigeon",
+    "A halftime costume change that happens in 2 seconds"
+  ],
+  "Game Action": [
+    "A touchdown is followed by a ridiculous celebration dance",
+    "A player catches the ball in slow-motion replay",
+    "A dramatic fumble makes the audience gasp",
+    "The announcers argue over a penalty call",
+    "A kicker scores and looks like they’ve won the lottery"
+  ],
+  "Fans": [
+    "Fan cries on camera after a touchdown",
+    "Fan holds a sign referencing a meme",
+    "A fan is wearing a bizarre homemade costume",
+    "The camera catches a group of fans singing along to the halftime show",
+    "A random celebrity in the crowd gets more cheers than the players"
+  ]
+};
 
-const generateRandomCard = () => {
+const categoriesHumorMe = {
+  "Commercials": [
+    "A commercial with a puppy, because who doesn’t like puppies?",
+    "A celebrity cameo so random it feels like Mad Libs",
+    "An ad that tries too hard to make you cry about toilet paper",
+    "A truck commercial with dirt flying like it's auditioning for an action movie",
+    "A commercial that makes you whisper, 'Wait, what was that even for?'"
+  ],
+  "Owners": [
+    "Owner smugly eating shrimp cocktail in slow motion",
+    "Billionaire owner laughs maniacally like a cartoon villain",
+    "Owner wearing a hat so ridiculous it deserves its own fashion line",
+    "Announcer refers to an owner as a 'visionary' (seriously?)",
+    "Owner shaking hands with a celebrity who clearly doesn’t know who they are"
+  ],
+  "Players": [
+    "Quarterback’s hair is discussed like it’s a critical stat",
+    "Player celebrates a 3-yard gain like they’ve won a Nobel Prize",
+    "A player flexes dramatically for no reason (as if we weren’t already impressed)",
+    "Slow-motion close-up of a player’s face that’s 90% sweat",
+    "Player fumbles, and announcers pretend it’s the end of the world"
+  ],
+  "Commentators": [
+    "Announcers call the field 'the battlefield' like it’s *Gladiator*",
+    "Commentator awkwardly tries to explain the rules to the audience",
+    "Announcer says 'unbelievable!' for something totally believable",
+    "Commentator references a random stat from 1982 for no reason",
+    "Sideline reporter interviews a coach who clearly doesn’t want to be there"
+  ]
+};
+
+const categoriesSillyWalks = {
+  "Monty Python References": [
+    "Someone yells, 'It’s just a flesh wound!' after a bad play",
+    "Party guest re-enacts the Ministry of Silly Walks",
+    "Guest shouts 'Spam!' every time a food commercial airs",
+    "Someone quotes, 'This is an ex-parrot!' at random",
+    "Guest recites the Holy Hand Grenade scene while holding a chicken wing"
+  ],
+  "Challenges": [
+    "Convince another guest to join you in a spontaneous silly walk",
+    "Re-enact the 'Argument Clinic' scene with the person next to you",
+    "Quote 'The Knights Who Say Ni' to the TV",
+    "Sing the 'Lumberjack Song' during halftime",
+    "Act out the 'Dead Parrot' sketch using nearby objects"
+  ],
+  "Game Action": [
+    "Yell 'Run away!' during an overly dramatic replay",
+    "Shout, 'Bring out your dead!' after a player gets tackled",
+    "Yell 'Ni!' every time the announcers say 'legacy'",
+    "When the ref throws a flag, shout, 'It’s only a model!'",
+    "Declare, 'And now for something completely different!' during a time-out"
+  ]
+};
+
+const generateRandomCard = (categories) => {
   const allSquares = Object.values(categories).flat();
   const shuffled = allSquares.sort(() => 0.5 - Math.random());
   currentCard = shuffled.slice(0, 25);
@@ -91,9 +115,11 @@ const renderHomeScreen = () => {
   app.innerHTML = `
     <div class="container">
       <img src="logo1.png" alt="Logo" class="logo">
-      <h1>The Fancy Schmancy Dinner Club's Second Annual Dandy-Cup Party</h1>
-      <button onclick="handleGenerateNewCard()">Generate New Card</button>
-      <button onclick="renderCardScreen()">Return to Card</button>
+      <h1>The Fancy Schmancy Dinner Club's First Annual Dandy-Cup Party</h1>
+      <button onclick="handleGenerateNewCard(categoriesSemiSerious)">Generate New Card</button>
+      <button onclick="handleGenerateNewCard(categoriesHumorMe)">Humor Me</button>
+      <button onclick="handleGenerateNewCard(categoriesSillyWalks)">Ministry of Silly Walks</button>
+      <button class="return-button" onclick="renderCardScreen()">Return to Card</button>
       <div class="qr-container">
         <h2>Share with Friends</h2>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://oneross.github.io/superbingo&bgcolor=d8d8d6" alt="QR Code">
@@ -140,8 +166,8 @@ const toggleSquare = (square, index) => {
   saveCardState();
 };
 
-const handleGenerateNewCard = () => {
-  generateRandomCard();
+const handleGenerateNewCard = (categories) => {
+  generateRandomCard(categories);
   renderCardScreen();
 };
 

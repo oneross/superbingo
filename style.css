@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #d8d8d6;
+    background-color: #f8f9fa;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,7 +16,7 @@ body {
     max-width: 600px;
   }
   
-  h1, h2, p {
+  h1, h2 {
     margin: 10px 0;
   }
   
@@ -28,13 +28,22 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 10px 0;
+    margin: 10px 5px;
     width: 100%; /* Full width on mobile */
     max-width: 300px;
   }
   
   button:hover {
     background-color: #0056b3;
+  }
+  
+  /* Different style for the Return to Card button */
+  .return-button {
+    background-color: #28a745;
+  }
+  
+  .return-button:hover {
+    background-color: #1e7d32;
   }
   
   /* Bingo Card Styles */
@@ -91,24 +100,4 @@ body {
     max-width: 200px;
     margin: 10px auto;
     display: block;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  @media (max-width: 600px) {
-    .bingo-card {
-      grid-template-columns: repeat(5, 1fr);
-    }
-  
-    .bingo-square {
-      padding: 8px;
-      font-size: 0.65rem;
-    }
-  
-    button {
-      font-size: 0.9rem;
-      padding: 8px;
-    }
   }
