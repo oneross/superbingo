@@ -67,7 +67,7 @@ const renderHomeScreen = () => {
   app.innerHTML = `
     <div class="container">
       <img src="logo1.png" alt="Logo" class="logo">
-      <h1>The Fancy Schmancy Dinner Club's First Annual Dandy-Cup Party</h1>
+      <h1>The Fancy Schmancy Dinner Club's Second Annual Dandy-Cup Party</h1>
       <button onclick="handleGenerateNewCard()">Generate New Card</button>
       <button onclick="renderCardScreen()">Return to Card</button>
       <div class="qr-container">
