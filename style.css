@@ -1,7 +1,7 @@
 /* General styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #d8d8d6; /* Updated to match the logo */
+    background-color: #d8d8d6; /* Matches the logo's background */
     margin: 0;
     padding: 0;
     display: flex;
@@ -45,6 +45,7 @@ body {
     background-color: #1e7d32;
   }
   
+  /* Bingo Card */
   .bingo-card {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -60,6 +61,8 @@ body {
     font-size: 0.8rem;
     cursor: pointer;
     border-radius: 5px;
+    overflow: hidden;
+    word-wrap: break-word;
   }
   
   .bingo-square.clicked {
@@ -68,6 +71,18 @@ body {
     font-weight: bold;
   }
   
+  .bingo-square:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Logo */
+  .logo {
+    max-width: 150px; /* Adjusted logo size */
+    margin: 10px auto;
+    display: block;
+  }
+  
+  /* QR Code */
   .qr-container {
     margin-top: 20px;
   }
