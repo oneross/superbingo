@@ -54,11 +54,11 @@ body {
   }
   
   .bingo-square {
-    padding: 10px;
+    padding: 8px; /* Reduced padding from 10px to 8px */
+    font-size: 0.75rem; /* Reduced font size from 0.8rem to 0.75rem */
     background-color: white;
     border: 1px solid #ddd;
     text-align: center;
-    font-size: 0.8rem;
     cursor: pointer;
     border-radius: 5px;
     overflow: hidden;
