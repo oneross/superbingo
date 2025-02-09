@@ -75,6 +75,23 @@ const categories = {
     });
   };
   
+  // Fullscreen toggle functionality
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
+  
+  document.getElementById('toggleFullscreen').addEventListener('click', toggleFullscreen);
+  
+  // Smooth scrolling initialization
+  const scroll = new SmoothScroll('button', {
+    speed: 300,
+    offset: 50,
+  });
+  
   document.getElementById('generateCard').addEventListener('click', () => {
     const card = generateRandomCard();
     renderCard(card);
