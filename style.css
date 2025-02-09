@@ -1,7 +1,7 @@
-/* General Styles */
+/* General styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #d8d8d6; /* Updated to match the logo */
     margin: 0;
     padding: 0;
     display: flex;
@@ -29,7 +29,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin: 10px 5px;
-    width: 100%; /* Full width on mobile */
+    width: 100%;
     max-width: 300px;
   }
   
@@ -37,7 +37,6 @@ body {
     background-color: #0056b3;
   }
   
-  /* Different style for the Return to Card button */
   .return-button {
     background-color: #28a745;
   }
@@ -46,7 +45,6 @@ body {
     background-color: #1e7d32;
   }
   
-  /* Bingo Card Styles */
   .bingo-card {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -59,12 +57,9 @@ body {
     background-color: white;
     border: 1px solid #ddd;
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     cursor: pointer;
-    user-select: none;
     border-radius: 5px;
-    overflow: hidden;
-    word-wrap: break-word;
   }
   
   .bingo-square.clicked {
@@ -73,31 +68,10 @@ body {
     font-weight: bold;
   }
   
-  .bingo-square:hover {
-    background-color: #e9ecef;
-  }
-  
-  /* Center (Free) Square */
-  .bingo-square:nth-child(13) {
-    background-color: #28a745;
-    color: white;
-    font-weight: bold;
-    pointer-events: none; /* Cannot be clicked */
-  }
-  
-  /* QR Code Styles */
   .qr-container {
-    margin: 20px 0;
+    margin-top: 20px;
   }
   
   .qr-container img {
     max-width: 150px;
-    width: 100%;
-  }
-  
-  /* Logo Styles */
-  .logo {
-    max-width: 200px;
-    margin: 10px auto;
-    display: block;
   }

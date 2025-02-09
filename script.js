@@ -2,7 +2,7 @@ const app = document.getElementById("app");
 let currentCard = null;
 let highlightedState = null;
 
-// Updated categories with more options
+// Categories for each card type
 const categoriesSemiSerious = {
   "Commercials": [
     "A commercial with a puppy",
@@ -39,18 +39,6 @@ const categoriesSemiSerious = {
     "A replay takes longer than 2 minutes",
     "The defense pulls off a surprising interception",
     "A player gets tackled and rolls on the ground dramatically"
-  ],
-  "Fans": [
-    "Fan cries on camera after a touchdown",
-    "Fan holds a sign referencing a meme",
-    "A fan is wearing a bizarre homemade costume",
-    "The camera catches a group of fans singing along to the halftime show",
-    "A random celebrity in the crowd gets more cheers than the players",
-    "A fan is caught chugging a drink",
-    "A kid looks bored in the front row",
-    "A fan waves an oversized foam finger",
-    "The camera zooms in on a painted face",
-    "A group of fans huddles under a blanket to stay warm"
   ]
 };
 
@@ -78,6 +66,18 @@ const categoriesHumorMe = {
     "Owner is shown with a trophy before the game even starts",
     "Announcers talk about how much money the owner has spent on 'improvements'",
     "Owner waves like royalty to their adoring peasants"
+  ],
+  "Fans": [
+    "Fan cries on camera after a touchdown",
+    "Fan holds a sign referencing a meme",
+    "A fan is wearing a bizarre homemade costume",
+    "The camera catches a group of fans singing along to the halftime show",
+    "A random celebrity in the crowd gets more cheers than the players",
+    "A fan is caught chugging a drink",
+    "A kid looks bored in the front row",
+    "A fan waves an oversized foam finger",
+    "The camera zooms in on a painted face",
+    "A group of fans huddles under a blanket to stay warm"
   ]
 };
 
@@ -108,29 +108,44 @@ const categoriesSillyWalks = {
   ]
 };
 
-// Ensure 5x5 grid is always generated
+const categoriesBeltalowda = {
+  "The Expanse References": [
+    "Someone says, 'We are Beltalowda!' randomly",
+    "Party guest mimics Amos by saying, 'I am that guy.'",
+    "Someone tries to say 'Inyalowda' in a conversation",
+    "A guest brings up 'Miller's hat' during halftime",
+    "Somebody whispers, 'Remember the Cant.'",
+    "Guest yells, 'This is a protomolecule play!' after a touchdown",
+    "Someone starts speaking in Belter Creole",
+    "A fan says, 'The Expanse should have had more seasons!'",
+    "Someone claims, 'Drummer is the real MVP!'",
+    "Someone quotes, 'The juice is loose!' while jumping around"
+  ]
+};
+
+// Generates a randomized 5x5 bingo card
 const generateRandomCard = (categories) => {
   const allSquares = Object.values(categories).flat();
   const shuffled = allSquares.sort(() => 0.5 - Math.random());
-  currentCard = shuffled.slice(0, 25); // Exactly 25 squares
-  highlightedState = Array(25).fill(false); // Reset highlighted state
-  highlightedState[12] = true; // Center square is always highlighted
+  currentCard = shuffled.slice(0, 25); // Exactly 25 squares for the grid
+  highlightedState = Array(25).fill(false); // Reset all highlighted squares
+  highlightedState[12] = true; // Center square is the "Free" square
   saveCardState();
   return currentCard;
 };
 
-// Save the current card and its state
+// Save and load card states
 const saveCardState = () => {
   localStorage.setItem("bingoCard", JSON.stringify(currentCard));
   localStorage.setItem("highlightedState", JSON.stringify(highlightedState));
 };
 
-// Load the card and its state
 const loadCardState = () => {
   currentCard = JSON.parse(localStorage.getItem("bingoCard"));
   highlightedState = JSON.parse(localStorage.getItem("highlightedState"));
 };
 
+// Render home screen
 const renderHomeScreen = () => {
   app.innerHTML = `
     <div class="container">
@@ -139,13 +154,19 @@ const renderHomeScreen = () => {
       <button onclick="handleGenerateNewCard(categoriesSemiSerious)">Generate New Card</button>
       <button onclick="handleGenerateNewCard(categoriesHumorMe)">Humor Me</button>
       <button onclick="handleGenerateNewCard(categoriesSillyWalks)">Ministry of Silly Walks</button>
+      <button onclick="handleGenerateNewCard(categoriesBeltalowda)">Beltalowda</button>
       <button class="return-button" onclick="renderCardScreen()">Return to Card</button>
+      <div class="qr-container">
+        <h2>Share with Friends</h2>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://oneross.github.io/superbingo&bgcolor=d8d8d6" alt="QR Code">
+      </div>
     </div>
   `;
 };
 
+// Render the bingo card screen
 const renderCardScreen = () => {
-  if (!currentCard) loadCardState(); // Load card if not already loaded
+  if (!currentCard) loadCardState();
   app.innerHTML = `
     <div class="container">
       <button onclick="renderHomeScreen()">Endzone</button>
@@ -155,15 +176,15 @@ const renderCardScreen = () => {
   renderBingoCard(currentCard);
 };
 
+// Render the bingo card grid
 const renderBingoCard = (card) => {
   const bingoCard = document.getElementById("bingoCard");
-  bingoCard.innerHTML = ""; // Clear any existing card
+  bingoCard.innerHTML = "";
   card.forEach((square, index) => {
     const div = document.createElement("div");
     div.className = "bingo-square";
     div.textContent = square;
     if (index === 12) {
-      // Center square is the "Free" square
       div.textContent = "★";
       div.classList.add("clicked");
     }
@@ -175,17 +196,19 @@ const renderBingoCard = (card) => {
   });
 };
 
+// Toggle square highlighting
 const toggleSquare = (square, index) => {
-  if (index === 12) return; // Center square cannot be toggled
+  if (index === 12) return;
   square.classList.toggle("clicked");
   highlightedState[index] = square.classList.contains("clicked");
   saveCardState();
 };
 
+// Generate card and render
 const handleGenerateNewCard = (categories) => {
   generateRandomCard(categories);
   renderCardScreen();
 };
 
-// Initial Render
+// Initial render
 renderHomeScreen();
