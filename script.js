@@ -2,44 +2,68 @@ const app = document.getElementById("app");
 let currentCard = null;
 let highlightedState = null;
 
-// Generate random bingo card
 const categories = {
-  "Commercials": [
-    "A commercial with a puppy",
-    "A celebrity cameo nobody expected",
-    "An ad so vague no one knows what it’s for",
-    "A truck commercial featuring slow-motion dirt",
-    "A commercial with a forced emotional appeal"
-  ],
-  "Owners": [
-    "A billionaire is shown in a luxury box",
-    "Owner smugly eating something fancy",
-    "Announcer calls an owner a 'genius'",
-    "A reference to how much money the owner spends",
-    "Owner wears ridiculous sports team merch"
-  ],
-  "Players": [
-    "A quarterback is called 'elite'",
-    "Player celebrates a basic play like it’s groundbreaking",
-    "A player flexes for no reason",
-    "Overly dramatic slow-motion replay of a player's face",
-    "A fumble described as a 'momentum shift'"
-  ],
-  "Commentators": [
-    "Commentators use a war metaphor ('battle', 'troops')",
-    "Commentators say 'this is what the game is all about'",
-    "An announcer messes up a name or stat",
-    "Commentator says 'we’ve got a ballgame!'",
-    "Sideline reporter talks to an uncooperative coach"
-  ],
-  "General": [
-    "National anthem singer holds the last note too long",
-    "A super slow-motion replay of a tackle",
-    "Half-time show features too much glitter",
-    "Camera zooms in on a fan crying",
-    "Game goes into overtime"
-  ]
-};
+    "Commercials": [
+      "A commercial with a puppy, because who doesn’t like puppies?",
+      "A celebrity cameo so random it feels like Mad Libs",
+      "An ad that tries too hard to make you cry about toilet paper",
+      "A truck commercial with dirt flying like it's auditioning for an action movie",
+      "A commercial that makes you whisper, 'Wait, what was that even for?'",
+      "Beer ad with a slow-motion cheers that looks suspiciously sexy",
+      "Crypto ad that pretends 2022 didn’t happen",
+      "An ad with a jingle so catchy you hate yourself for liking it",
+      "A luxury car ad featuring people who definitely don’t drive",
+      "A commercial where a famous actor tries way too hard to look relatable"
+    ],
+    "Owners": [
+      "Owner smugly eating shrimp cocktail in slow motion",
+      "Billionaire owner laughs maniacally like a cartoon villain",
+      "Owner wearing a hat so ridiculous it deserves its own fashion line",
+      "Announcer refers to an owner as a 'visionary' (seriously?)",
+      "Owner shaking hands with a celebrity who clearly doesn’t know who they are",
+      "Owner awkwardly high-fives a random fan for the camera",
+      "A shot of the owner looking bored despite their team winning",
+      "Owner is shown with a trophy before the game even starts",
+      "Announcers talk about how much money the owner has spent on 'improvements'",
+      "Owner waves like royalty to their adoring peasants"
+    ],
+    "Players": [
+      "Quarterback’s hair is discussed like it’s a critical stat",
+      "Player celebrates a 3-yard gain like they’ve won a Nobel Prize",
+      "A player flexes dramatically for no reason (as if we weren’t already impressed)",
+      "Slow-motion close-up of a player’s face that’s 90% sweat",
+      "Player fumbles, and announcers pretend it’s the end of the world",
+      "A lineman is described as having 'deceptive speed' (code for slow)",
+      "Player has a touchdown dance more choreographed than a Broadway show",
+      "Announcer says a player 'has ice in his veins' (like he’s a cyborg)",
+      "Announcers discuss a player's obscure childhood hobby (like knitting or taxidermy)",
+      "A kicker misses, and the camera cuts to someone looking disappointed"
+    ],
+    "Commentators": [
+      "Announcers call the field 'the battlefield' like it’s *Gladiator*",
+      "Commentator awkwardly tries to explain the rules to the audience",
+      "Announcer says 'unbelievable!' for something totally believable",
+      "Commentator references a random stat from 1982 for no reason",
+      "Sideline reporter interviews a coach who clearly doesn’t want to be there",
+      "Commentator yells 'What a catch!' even when it’s not",
+      "Commentator makes an awkward pun that lands like a lead balloon",
+      "Commentators use the word 'legacy' as if it’s a Shakespeare play",
+      "Announcers hype up a player’s pre-game meal like it’s life-changing",
+      "A commentator tries to sound deep and ends up just being confusing"
+    ],
+    "General": [
+      "National anthem singer holds the final note long enough for a bathroom break",
+      "A tackle so dramatic it looks like a Mortal Kombat move",
+      "Half-time show looks like it was designed by a glitter-obsessed 5-year-old",
+      "Fan in the stands crying, possibly because they spent $5,000 on tickets",
+      "Game goes into overtime, and someone groans loudly",
+      "A streaker runs onto the field and gets tackled harder than any player",
+      "Camera zooms in on a coach screaming something definitely not PG",
+      "The mascot does something weirdly athletic for no reason",
+      "Announcer says 'this is what it’s all about' like it’s the *Hunger Games*",
+      "Someone in the room says, 'Wait, what just happened?'"
+    ]
+  };
 
 const generateRandomCard = () => {
   const allSquares = Object.values(categories).flat();
