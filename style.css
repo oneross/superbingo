@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #d8d8d6;
     margin: 0;
     padding: 0;
     display: flex;
@@ -41,16 +41,16 @@ body {
   .bingo-card {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    gap: 5px;
     margin-top: 20px;
   }
   
   .bingo-square {
-    padding: 15px;
+    padding: 10px;
     background-color: white;
     border: 1px solid #ddd;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     cursor: pointer;
     user-select: none;
     border-radius: 5px;
@@ -66,6 +66,14 @@ body {
   
   .bingo-square:hover {
     background-color: #e9ecef;
+  }
+  
+  /* Center (Free) Square */
+  .bingo-square:nth-child(13) {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    pointer-events: none; /* Cannot be clicked */
   }
   
   /* QR Code Styles */
@@ -91,12 +99,12 @@ body {
   
   @media (max-width: 600px) {
     .bingo-card {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
   
     .bingo-square {
-      padding: 10px;
-      font-size: 0.8rem;
+      padding: 8px;
+      font-size: 0.65rem;
     }
   
     button {

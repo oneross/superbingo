@@ -1,5 +1,6 @@
 const app = document.getElementById("app");
 let currentCard = null;
+let highlightedState = null;
 
 // Generate random bingo card
 const categories = {
@@ -44,10 +45,24 @@ const generateRandomCard = () => {
   const allSquares = Object.values(categories).flat();
   const shuffled = allSquares.sort(() => 0.5 - Math.random());
   currentCard = shuffled.slice(0, 25);
+  highlightedState = Array(25).fill(false); // Reset highlighted state
+  highlightedState[12] = true; // Center square is always highlighted
+  saveCardState();
   return currentCard;
 };
 
-// Render Home Screen
+// Save the current card and its state
+const saveCardState = () => {
+  localStorage.setItem("bingoCard", JSON.stringify(currentCard));
+  localStorage.setItem("highlightedState", JSON.stringify(highlightedState));
+};
+
+// Load the card and its state
+const loadCardState = () => {
+  currentCard = JSON.parse(localStorage.getItem("bingoCard"));
+  highlightedState = JSON.parse(localStorage.getItem("highlightedState"));
+};
+
 const renderHomeScreen = () => {
   app.innerHTML = `
     <div class="container">
@@ -63,15 +78,15 @@ const renderHomeScreen = () => {
   `;
 };
 
-// Render Card Screen
 const renderCardScreen = () => {
+  if (!currentCard) loadCardState(); // Load card if not already loaded
   app.innerHTML = `
     <div class="container">
       <button onclick="renderHomeScreen()">Endzone</button>
       <div id="bingoCard" class="bingo-card"></div>
     </div>
   `;
-  renderBingoCard(currentCard || generateRandomCard());
+  renderBingoCard(currentCard);
 };
 
 const renderBingoCard = (card) => {
@@ -81,12 +96,26 @@ const renderBingoCard = (card) => {
     const div = document.createElement("div");
     div.className = "bingo-square";
     div.textContent = square;
-    div.addEventListener("click", () => div.classList.toggle("clicked"));
+    if (index === 12) {
+      // Center square is the "Free" square
+      div.textContent = "★";
+      div.classList.add("clicked");
+    }
+    if (highlightedState[index]) {
+      div.classList.add("clicked");
+    }
+    div.addEventListener("click", () => toggleSquare(div, index));
     bingoCard.appendChild(div);
   });
 };
 
-// Handle Generate New Card
+const toggleSquare = (square, index) => {
+  if (index === 12) return; // Center square cannot be toggled
+  square.classList.toggle("clicked");
+  highlightedState[index] = square.classList.contains("clicked");
+  saveCardState();
+};
+
 const handleGenerateNewCard = () => {
   generateRandomCard();
   renderCardScreen();
