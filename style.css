@@ -1,10 +1,10 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -12,15 +12,12 @@ body {
   
   .container {
     text-align: center;
-    padding: 10px;
-    max-width: 100%;
-    box-sizing: border-box;
+    width: 100%;
+    max-width: 600px;
   }
   
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    word-wrap: break-word;
+  h1, h2, p {
+    margin: 10px 0;
   }
   
   button {
@@ -31,23 +28,21 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 15px;
-    width: 100%; /* Ensures it fits well on mobile */
-    max-width: 300px; /* Restricts overly large buttons */
+    margin: 10px 0;
+    width: 100%; /* Full width on mobile */
+    max-width: 300px;
   }
   
   button:hover {
     background-color: #0056b3;
   }
   
+  /* Bingo Card Styles */
   .bingo-card {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-    width: 100%; /* Make the bingo card full-width */
-    max-width: 500px; /* Add a max width for larger screens */
-    margin: 0 auto;
-    box-sizing: border-box;
+    margin-top: 20px;
   }
   
   .bingo-square {
@@ -59,8 +54,8 @@ body {
     cursor: pointer;
     user-select: none;
     border-radius: 5px;
-    overflow: hidden; /* Ensures text doesn't spill over */
-    word-wrap: break-word; /* Handles long text */
+    overflow: hidden;
+    word-wrap: break-word;
   }
   
   .bingo-square.clicked {
@@ -73,13 +68,39 @@ body {
     background-color: #e9ecef;
   }
   
+  /* QR Code Styles */
+  .qr-container {
+    margin: 20px 0;
+  }
+  
+  .qr-container img {
+    max-width: 150px;
+    width: 100%;
+  }
+  
+  /* Logo Styles */
+  .logo {
+    max-width: 200px;
+    margin: 10px auto;
+    display: block;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
   @media (max-width: 600px) {
-    h1 {
-      font-size: 1.2rem;
+    .bingo-card {
+      grid-template-columns: repeat(2, 1fr);
     }
   
     .bingo-square {
       padding: 10px;
       font-size: 0.8rem;
+    }
+  
+    button {
+      font-size: 0.9rem;
+      padding: 8px;
     }
   }
